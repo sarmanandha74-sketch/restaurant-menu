@@ -1,99 +1,455 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Restaurant Menu</title>
+    <title>Foodie Restaurant</title>
 
     <style>
-        body {
-            font-family: Arial;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            background-color: #f5f5f5;
+            padding: 0;
         }
 
-        h1 {
-            text-align: center;
-            background-color: #8b4513;
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            color: #333;
+        }
+
+        header {
+            background: #8b4513;
             color: white;
-            padding: 20px;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: #fff0d9;
+        }
+
+        .hero h2 {
+            font-size: 35px;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            margin-bottom: 20px;
+        }
+
+        .search {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .search input {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+        }
+
+        .categories {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .categories button {
+            padding: 10px 18px;
+            margin: 5px;
+            border: none;
+            border-radius: 20px;
+            background: #8b4513;
+            color: white;
+            cursor: pointer;
+        }
+
+        .categories button:hover {
+            background: #5c2e0b;
         }
 
         .menu {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 30px;
+            gap: 25px;
+            padding: 20px 7%;
         }
 
         .food {
-            background-color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px gray;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px #ccc;
+            transition: 0.3s;
+        }
+
+        .food:hover {
+            transform: translateY(-8px);
         }
 
         .food img {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 8px;
         }
 
-        .food h2 {
-            margin: 10px;
+        .food-content {
+            padding: 18px;
+        }
+
+        .food-content h3 {
+            margin-bottom: 8px;
+            color: #8b4513;
+        }
+
+        .rating {
+            color: #f5a623;
+            margin-bottom: 8px;
         }
 
         .price {
             color: green;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #8b4513;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #5c2e0b;
+        }
+
+        .cart {
+            background: white;
+            margin: 30px 7%;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px #ccc;
+        }
+
+        .cart h2 {
+            color: #8b4513;
+            margin-bottom: 15px;
+        }
+
+        #cartItems {
+            margin-bottom: 15px;
+        }
+
+        .about {
+            text-align: center;
+            padding: 50px 10%;
+            background: #fff0d9;
+            margin-top: 30px;
+        }
+
+        .about h2 {
+            color: #8b4513;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .dark {
+            background: #222;
+            color: white;
+        }
+
+        .dark .food,
+        .dark .cart {
+            background: #333;
+            color: white;
+        }
+
+        .dark .hero,
+        .dark .about {
+            background: #444;
+        }
+
+        #darkBtn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 800px) {
+            .menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .menu {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>🍴 Our Restaurant Menu</h1>
+<header>
+    <h1>🍴 Foodie</h1>
 
-    <div class="menu">
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+    </nav>
 
-        <div class="food">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38">
-            <h2>Pizza</h2>
+    <button id="darkBtn" onclick="darkMode()">🌙</button>
+</header>
+
+
+<section class="hero" id="home">
+    <h2>Welcome to Foodie Restaurant</h2>
+    <p>Delicious food made with love ❤️</p>
+</section>
+
+
+<div class="search">
+    <input type="text" id="search"
+           placeholder="🔍 Search your favourite food..."
+           onkeyup="searchFood()">
+</div>
+
+
+<div class="categories">
+    <button onclick="filterFood('all')">All</button>
+    <button onclick="filterFood('pizza')">Pizza</button>
+    <button onclick="filterFood('burger')">Burger</button>
+    <button onclick="filterFood('dessert')">Dessert</button>
+    <button onclick="filterFood('drink')">Drinks</button>
+</div>
+
+
+<section class="menu" id="menu">
+
+    <div class="food" data-category="pizza">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38">
+        <div class="food-content">
+            <h3>🍕 Cheese Pizza</h3>
+            <p class="rating">⭐⭐⭐⭐⭐</p>
+            <p>Fresh cheese pizza with delicious toppings.</p>
             <p class="price">₹150</p>
+            <button class="add-btn" onclick="addCart('Cheese Pizza',150)">
+                Add to Cart
+            </button>
         </div>
-
-        <div class="food">
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
-            <h2>Burger</h2>
-            <p class="price">₹120</p>
-        </div>
-
-        <div class="food">
-            <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
-            <h2>French Fries</h2>
-            <p class="price">₹80</p>
-        </div>
-
-        <div class="food">
-            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601">
-            <h2>Pasta</h2>
-            <p class="price">₹130</p>
-        </div>
-
-        <div class="food">
-            <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5">
-            <h2>Sandwich</h2>
-            <p class="price">₹100</p>
-        </div>
-
-        <div class="food">
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587">
-            <h2>Cake</h2>
-            <p class="price">₹90</p>
-        </div>
-
     </div>
+
+
+    <div class="food" data-category="burger">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+        <div class="food-content">
+            <h3>🍔 Classic Burger</h3>
+            <p class="rating">⭐⭐⭐⭐⭐</p>
+            <p>Juicy burger with fresh vegetables.</p>
+            <p class="price">₹120</p>
+            <button class="add-btn" onclick="addCart('Classic Burger',120)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+
+    <div class="food" data-category="pizza">
+        <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498">
+        <div class="food-content">
+            <h3>🍕 Veg Pizza</h3>
+            <p class="rating">⭐⭐⭐⭐</p>
+            <p>Loaded with fresh vegetables and cheese.</p>
+            <p class="price">₹140</p>
+            <button class="add-btn" onclick="addCart('Veg Pizza',140)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+
+    <div class="food" data-category="burger">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+        <div class="food-content">
+            <h3>🍔 Cheese Burger</h3>
+            <p class="rating">⭐⭐⭐⭐⭐</p>
+            <p>Soft bun with cheese and crispy patty.</p>
+            <p class="price">₹130</p>
+            <button class="add-btn" onclick="addCart('Cheese Burger',130)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+
+    <div class="food" data-category="dessert">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587">
+        <div class="food-content">
+            <h3>🍰 Chocolate Cake</h3>
+            <p class="rating">⭐⭐⭐⭐⭐</p>
+            <p>Soft and creamy chocolate cake.</p>
+            <p class="price">₹90</p>
+            <button class="add-btn" onclick="addCart('Chocolate Cake',90)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+
+    <div class="food" data-category="drink">
+        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735">
+        <div class="food-content">
+            <h3>☕ Cold Coffee</h3>
+            <p class="rating">⭐⭐⭐⭐</p>
+            <p>Refreshing chilled coffee.</p>
+            <p class="price">₹80</p>
+            <button class="add-btn" onclick="addCart('Cold Coffee',80)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+</section>
+
+
+<section class="cart">
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems">
+        No items added yet.
+    </div>
+
+    <h3>Total: ₹<span id="total">0</span></h3>
+
+</section>
+
+
+<section class="about" id="about">
+
+    <h2>About Us</h2>
+
+    <p>
+        Foodie Restaurant provides delicious and quality food
+        at affordable prices. We serve fresh food with love
+        and care for our customers.
+    </p>
+
+</section>
+
+
+<footer>
+    <p>📞 Contact: 98765 43210</p>
+    <p>📧 foodie@gmail.com</p>
+    <p>© 2026 Foodie Restaurant</p>
+</footer>
+
+
+<script>
+
+    let total = 0;
+    let items = [];
+
+    function addCart(name, price) {
+
+        items.push(name);
+
+        total += price;
+
+        document.getElementById("cartItems").innerHTML =
+            items.join("<br>");
+
+        document.getElementById("total").innerText = total;
+    }
+
+
+    function searchFood() {
+
+        let search =
+            document.getElementById("search").value.toLowerCase();
+
+        let foods =
+            document.querySelectorAll(".food");
+
+        foods.forEach(function(food) {
+
+            let name =
+                food.querySelector("h3").innerText.toLowerCase();
+
+            if (name.includes(search)) {
+                food.style.display = "block";
+            } else {
+                food.style.display = "none";
+            }
+
+        });
+    }
+
+
+    function filterFood(category) {
+
+        let foods =
+            document.querySelectorAll(".food");
+
+        foods.forEach(function(food) {
+
+            if (category == "all" ||
+                food.dataset.category == category) {
+
+                food.style.display = "block";
+
+            } else {
+
+                food.style.display = "none";
+
+            }
+
+        });
+    }
+
+
+    function darkMode() {
+
+        document.body.classList.toggle("dark");
+
+    }
+
+</script>
 
 </body>
 </html>
